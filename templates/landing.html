@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>旅程規劃三款版本</title>
+  <style>
+    body {
+      font-family: "Noto Sans TC", system-ui, sans-serif;
+      margin: 0;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+    header {
+      padding: 32px 24px 16px;
+      text-align: center;
+    }
+    .versions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      padding: 0 24px 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+    .card h2 {
+      margin-top: 0;
+    }
+    .card p {
+      color: #6b7280;
+    }
+    .card a {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #2563eb;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>旅程規劃網站三種版本</h1>
+    <p>請選擇你喜歡的版型，皆支援建立旅程、每日安排與花費統計。</p>
+  </header>
+  <section class="versions">
+    <article class="card">
+      <h2>版本一・清新白</h2>
+      <p>適合追求簡潔與效率的行程管理者。</p>
+      <a href="/v1">前往版本一</a>
+    </article>
+    <article class="card">
+      <h2>版本二・夜色卡片</h2>
+      <p>沉穩深色搭配彩度點綴，適合夜間規劃。</p>
+      <a href="/v2">前往版本二</a>
+    </article>
+    <article class="card">
+      <h2>版本三・溫暖手帳</h2>
+      <p>溫暖配色與手帳感排版，適合慢活旅行。</p>
+      <a href="/v3">前往版本三</a>
+    </article>
+  </section>
+</body>
+</html>

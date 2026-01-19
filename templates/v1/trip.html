@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ trip.name }}｜旅程規劃</title>
+  <link rel="stylesheet" href="/static/v1.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>{{ trip.name }}</h1>
+      <p class="helper">右滑切換天數，支援拖曳與觸控滑動。</p>
+      <div style="display:flex; gap:8px; flex-wrap: wrap; margin-top: 8px;">
+        <a class="button secondary" href="/v1">返回行程列表</a>
+      </div>
+      <small class="helper">旅程總消費：NT$ {{ "%.2f"|format(trip_total) }}</small>
+    </div>
+  </header>
+  <main class="container">
+    <section class="card">
+      <h2>編輯旅程資訊</h2>
+      <form class="inline" action="/v1/trips/{{ trip.id }}/edit" method="post">
+        <div style="flex: 1 1 180px;">
+          <label>旅程名稱</label>
+          <input name="name" value="{{ trip.name }}" required />
+        </div>
+        <div style="width: 120px;">
+          <label>遊玩天數</label>
+          <input name="days" type="number" min="1" max="30" value="{{ trip.days }}" required />
+        </div>
+        <div style="display:flex; align-items:end;">
+          <button class="button" type="submit">更新旅程</button>
+        </div>
+      </form>
+    </section>
+
+    <section style="margin-top: 24px;">
+      <h2>每日行程安排</h2>
+      <div class="scroll-days">
+        {% for summary in summaries %}
+        <article class="card day-panel">
+          <div style="display:flex; justify-content: space-between; align-items: center;">
+            <h3>第 {{ summary.day_number }} 天</h3>
+            <span class="badge">NT$ {{ "%.2f"|format(summary.total) }}</span>
+          </div>
+          <ul class="list">
+            {% for item in summary.items %}
+            <li>
+              <strong>{{ item.title }}</strong>
+              {% if item.map_link %}
+              <div><a href="{{ item.map_link }}" target="_blank">地圖連結</a></div>
+              {% endif %}
+              {% if item.expense_name %}
+              <small>{{ item.expense_name }}：NT$ {{ "%.2f"|format(item.expense_amount) }}</small>
+              {% else %}
+              <small>花費：NT$ {{ "%.2f"|format(item.expense_amount) }}</small>
+              {% endif %}
+              <form action="/v1/trips/{{ trip.id }}/items/{{ item.id }}/delete" method="post" style="margin-top: 8px;">
+                <button class="button secondary" type="submit">刪除項目</button>
+              </form>
+            </li>
+            {% else %}
+            <li class="helper">尚未新增行程。</li>
+            {% endfor %}
+          </ul>
+          <form action="/v1/trips/{{ trip.id }}/items" method="post" style="margin-top: 12px;">
+            <input type="hidden" name="day_number" value="{{ summary.day_number }}" />
+            <div style="display:grid; gap:8px;">
+              <input name="title" placeholder="行程名稱" required />
+              <input name="map_link" placeholder="地圖連結 (可選)" />
+              <input name="expense_name" placeholder="消費品項 (可選)" />
+              <input name="expense_amount" type="number" min="0" step="0.01" value="0" />
+              <button class="button" type="submit">新增行程</button>
+            </div>
+          </form>
+          <small class="helper">當天總消費：NT$ {{ "%.2f"|format(summary.total) }}</small>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+</body>
+</html>

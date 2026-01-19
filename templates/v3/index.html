@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>旅程規劃・版本三</title>
+  <link rel="stylesheet" href="/static/v3.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>版本三｜溫暖手帳旅程規劃</h1>
+      <p class="helper">溫暖手帳風格，滑動卡片快速安排每日行程。</p>
+      <a class="button secondary" href="/">返回版本選擇</a>
+    </div>
+  </header>
+  <main class="container">
+    <section class="card">
+      <h2>建立新旅程</h2>
+      <form class="inline" action="/v3/trips" method="post">
+        <div style="flex: 1 1 180px;">
+          <label>旅程名稱</label>
+          <input name="name" placeholder="例如：京都慢旅" required />
+        </div>
+        <div style="width: 120px;">
+          <label>遊玩天數</label>
+          <input name="days" type="number" min="1" max="30" value="5" required />
+        </div>
+        <div style="display:flex; align-items:end;">
+          <button class="button" type="submit">新增旅程</button>
+        </div>
+      </form>
+    </section>
+
+    <section style="margin-top: 24px;">
+      <h2>已建立旅程</h2>
+      <div class="grid">
+        {% for trip in trips %}
+        <article class="card">
+          <h3>{{ trip.name }}</h3>
+          <small>{{ trip.days }} 天行程</small>
+          <div style="margin-top: 12px; display:flex; gap:8px; flex-wrap: wrap;">
+            <a class="button" href="/v3/trips/{{ trip.id }}">進入行程</a>
+            <form action="/v3/trips/{{ trip.id }}/delete" method="post">
+              <button class="button secondary" type="submit">刪除</button>
+            </form>
+          </div>
+        </article>
+        {% else %}
+        <p class="helper">目前尚未建立旅程。</p>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+</body>
+</html>
