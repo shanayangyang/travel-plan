@@ -1,0 +1,126 @@
+:root {
+  color-scheme: dark;
+  --primary: #f97316;
+  --secondary: #22d3ee;
+  --bg: #0f172a;
+  --card: #111827;
+  --muted: #94a3b8;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans TC", system-ui, sans-serif;
+  background: var(--bg);
+  color: #f8fafc;
+}
+
+header {
+  padding: 24px;
+  background: radial-gradient(circle at top left, #1e293b, #0f172a 70%);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 24px 64px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 18px;
+  border: 1px solid #1f2937;
+  padding: 16px;
+  box-shadow: 0 12px 25px rgba(2, 6, 23, 0.4);
+}
+
+.card small {
+  color: var(--muted);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: none;
+  background: var(--primary);
+  color: #0f172a;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button.secondary {
+  background: #1f2937;
+  color: #e2e8f0;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #0b1120;
+  color: #f8fafc;
+  font-size: 14px;
+}
+
+form.inline {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.scroll-days {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+}
+
+.day-panel {
+  min-width: 320px;
+  max-width: 360px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.2);
+  color: #67e8f9;
+  font-size: 12px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list li {
+  border-radius: 12px;
+  padding: 12px;
+  background: #0b1120;
+  border: 1px solid #1f2937;
+}
+
+.helper {
+  color: var(--muted);
+  font-size: 12px;
+}
